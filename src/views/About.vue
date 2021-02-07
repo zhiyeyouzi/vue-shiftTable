@@ -24,22 +24,37 @@
               <div class="week-event-table" v-for="(itemA, indexA) in item.data" :key="indexA">
                 <div class="week-item">
 <!--                  左侧展示的每个人-->
-                  <div class="week-item-day" >{{itemA.title}}</div>
+                  <div class="week-item-day-left">
+<!--                    未分配-->
+                    <div class="item-day-left-unallot" v-if="indexA === 0">
+                      {{itemA.title}}
+                    </div>
+<!--                    已分配给人-->
+                    <div class="item-day-left-alloted" v-else>
+                      <img src="" alt="icon">
+                      {{itemA.title}}
+                    </div>
+                  </div>
 <!--                  右侧的日历格子-->
                   <div class="week-item-day" v-for="(itemBox, indexBox) in weekBox"
                        :key="indexBox"
                        @click="handleGridDate(itemBox, itemA)">
+<!--                    第一种-->
 <!--                    <div v-for="(itemB, indexB) in itemA.data"-->
 <!--                         :key="indexB" class="week-item-order"-->
+<!--                         @click.stop="handleClickEvent"-->
 <!--                         v-show="itemBox.day.num === itemB.date">-->
-<!--                        {{itemB.title}}-->
+<!--                      <div class="week-item-order-t">{{itemB.date}}我你笑ID解散分开了较好的是功夫就可获得更好的福利卡改好了打分卡挂号费打卡记录挂号费大骨灰级阿卡丽</div>-->
+<!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}撒京东快地方噶广东省防范大哥发的刮大风</div>-->
 <!--                    </div>-->
-                    <div v-for="(itemB, indexB) in itemA.data" :key="indexB" class="week-item-order">
-                      <template
-                          v-if="itemBox.day.num === itemB.date">
-                        {{itemB.title}}
-                      </template>
-                    </div>
+<!--                    第二种-->
+<!--                    <div v-for="(itemB, indexB) in itemA.data" :key="indexB" class="week-item-order">-->
+<!--                      <template-->
+<!--                          v-if="itemBox.day.num === itemB.date">-->
+<!--                        <div class="week-item-order-t">{{itemB.date}}</div>-->
+<!--                        <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
+<!--                      </template>-->
+<!--                    </div>-->
                   </div>
                 </div>
               </div>
@@ -80,21 +95,21 @@ export default {
             {
               title: '张珊',
               data: [
-                {date: '2021-02-05', title: '迪'},
-                {date: '2021-02-05', title: '加'},
-                {date: '2021-02-03', title: '阿'},
-                {date: '2021-02-04', title: '他'},
-                {date: '2021-02-07', title: '马'},
+                {date: '2021-02-05', title: '迪', status: "pending"},
+                {date: '2021-02-05', title: '加', status: "pending"},
+                {date: '2021-02-03', title: '阿', status: "pending"},
+                {date: '2021-02-04', title: '他', status: "pending"},
+                {date: '2021-02-07', title: '马', status: "pending"},
               ]
             },
             {
               title: '李思',
               data: [
-                {date: '2021-02-08', title: 'xixix1'},
-                {date: '2021-02-01', title: 'xixix2'},
-                {date: '2021-02-03', title: 'xixix3'},
-                {date: '2021-02-04', title: 'xixix4'},
-                {date: '2021-02-07', title: 'xixix5'},
+                {date: '2021-02-08', title: 'xixix1', status: "accepted"},
+                {date: '2021-02-01', title: 'xixix2', status: "accepted"},
+                {date: '2021-02-03', title: 'xixix3', status: "accepted"},
+                {date: '2021-02-04', title: 'xixix4', status: "accepted"},
+                {date: '2021-02-07', title: 'xixix5', status: "accepted"},
               ]
             },
           ]
@@ -298,12 +313,29 @@ export default {
           border: 1px solid #DEDCDA;
           display: flex;
           align-items: center;
-          justify-content: center;
           min-height: 50px;
           font-size: 12px;
           border-right: none;
           padding: 5px;
           box-sizing: border-box;
+          .item-day-left-unallot, .item-day-left-alloted{
+            font-size: 12px;
+            line-height: 16px;
+            padding-left: 10px;
+          }
+          .item-day-left-unallot{
+            font-weight: bold;
+            color: #080707;
+          }
+          .item-day-left-alloted{
+            color: #006DCC;
+            text-decoration:underline;
+            cursor: pointer;
+            img{
+              width: 20px;
+              height: 20px;
+            }
+          }
         }
         .week-item-day{
           width: 12.5%;
@@ -316,11 +348,29 @@ export default {
           .week-item-order{
             width: 100%;
             height: 46px;
-            background-color: pink;
             border: 1px solid #DEDCDA;
             border-radius: 3px;
             margin-bottom: 10px;
-            color: #1589ee;
+            border-left: 3px solid red;
+            padding: 6px 10px;
+            box-sizing: border-box;
+            .week-item-order-t, .week-item-order-b{
+              text-align: left;
+              font-size: 12px;
+              line-height: 16px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+            .week-item-order-t{
+              color: #080707;
+              font-weight: bold;
+              cursor: pointer;
+            }
+            .week-item-order-t:hover{ text-decoration:underline;}
+            .week-item-order-b{
+              color: #333333;
+            }
           }
         }
         .week-item-day:last-child{
