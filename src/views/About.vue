@@ -19,9 +19,9 @@
           <div class="week-event">
             <div class="week-event-item" v-for="(item, index) in analogData" :key="index">
 <!--              按区域区分-->
-              <div class="week-event-area">{{item.area}}</div>
-<!--              区域下的每个人的任务-->
-              <div class="week-event-table" v-for="(itemA, indexA) in item.data" :key="indexA">
+              <div class="week-event-area" @click="tapAreaStatus(item, index)">{{item.area}}</div>
+<!--              区域下的的任务-->
+              <div class="week-event-table" v-for="(itemA, indexA) in item.data" :key="indexA" v-show="item.openStatus">
                 <div class="week-item">
 <!--                  左侧展示的每个人-->
                   <div class="week-item-day-left">
@@ -87,6 +87,7 @@ export default {
       analogData: [
         {
           area: '大陆',
+          openStatus: true,
           data: [
             {
               title: "未分配",
@@ -114,31 +115,36 @@ export default {
             },
           ]
         },
-        // {
-        //   area: '港澳台',
-        //   data: [
-        //     {
-        //       title: '绝望',
-        //       data: [
-        //         {date: '2021-2-5', title: 'hahhah'},
-        //         {date: '2021-2-1', title: 'hahhah'},
-        //         {date: '2021-2-3', title: 'hahhah'},
-        //         {date: '2021-2-4', title: 'hahhah'},
-        //         {date: '2021-2-7', title: 'hahhah'},
-        //       ]
-        //     },
-        //     {
-        //       title: '太难了',
-        //       data: [
-        //         {date: '2021-2-5', title: '111ah'},
-        //         {date: '2021-2-1', title: '111ah'},
-        //         {date: '2021-2-3', title: '111ah'},
-        //         {date: '2021-2-4', title: '111ah'},
-        //         {date: '2021-2-7', title: '111ah'},
-        //       ]
-        //     },
-        //   ]
-        // },
+        {
+          area: '港澳台',
+          openStatus: true,
+          data: [
+            {
+              title: "未分配",
+              data: []
+            },
+            {
+              title: '王舞',
+              data: [
+                {date: '2021-02-05', title: 'hahhah'},
+                {date: '2021-02-01', title: 'hahhah'},
+                {date: '2021-02-03', title: 'hahhah'},
+                {date: '2021-02-04', title: 'hahhah'},
+                {date: '2021-02-07', title: 'hahhah'},
+              ]
+            },
+            {
+              title: '赵琉',
+              data: [
+                {date: '2021-02-05', title: '111ah'},
+                {date: '2021-02-01', title: '111ah'},
+                {date: '2021-02-03', title: '111ah'},
+                {date: '2021-02-04', title: '111ah'},
+                {date: '2021-02-07', title: '111ah'},
+              ]
+            },
+          ]
+        },
       ],
       activeName: 'second',
       // 今天
@@ -158,6 +164,11 @@ export default {
     }
   },
   methods: {
+    // 切换区域状态
+    tapAreaStatus(item, index) {
+      this.analogData[index].openStatus = !item.openStatus
+    },
+    // 阻止事件穿透
     handleClickEvent() {
 
     },
