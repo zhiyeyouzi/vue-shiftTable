@@ -1,4 +1,4 @@
-# table2
+# vue-shift-table
 
 ## Project setup
 ```
