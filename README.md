@@ -1,4 +1,6 @@
 # vue-shift-table
+这是一个什么项目呢？
+可能一个用 div 堆起来的表格。 
 
 ## Project setup
 ```
