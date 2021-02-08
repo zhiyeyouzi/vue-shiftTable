@@ -255,6 +255,10 @@ export default {
 
 <style scoped lang="scss">
 
+.week-home{
+  padding: 10px;
+}
+
 .week-table-header{
   width: 100%;
   position: relative;
