@@ -2,21 +2,38 @@
   <div class="week-home">
 <!--    切换星期-->
     <div class="week-table-header">
-      <el-tabs v-model="activeName" @tab-click="handleTabClick" style="width: 100%;">
+      <!-- <el-tabs v-model="activeName" @tab-click="handleTabClick" style="width: 100%;">
         <el-tab-pane label="轮班" name="first">
           <p></p>
           <h1>轮班</h1>
         </el-tab-pane>
         <el-tab-pane label="资源" name="second">
-          <!--星期视图表头-->
-          <div class="week">
+        </el-tab-pane>
+      </el-tabs> -->
+      <div class="header-option">
+        <div class="tab-view">资源</div>
+        <!--      右上角切换按钮-->
+        <div class="btn-box" v-if="true">
+          <el-button size="small" @click="gotoWeek(-1)">
+            <i class="el-icon-arrow-left"></i>
+          </el-button>
+          <el-button size="small" @click="gotoWeek(1)" style="margin-left: 0;">
+            <i class="el-icon-arrow-right"></i>
+          </el-button>
+          <el-button size="small" @click="gotoWeek(0)">
+            今天
+          </el-button>
+        </div>
+      </div>
+<!--星期视图表头-->
+      <div class="week">
             <div class="week-day"></div>
             <div v-for="(item, index) in weekBox" :key="index" :class="item.day.num!== todayDate?'week-day':'week-day week-day-active'">
               {{ item.day.week }}
             </div>
           </div>
 <!--          下方数据展示-->
-          <div class="week-event">
+      <div class="week-event">
             <div class="week-event-item" v-for="(item, index) in analogData" :key="index">
 <!--              按区域区分-->
               <div class="week-event-area" @click="tapAreaStatus(item, index)">{{item.area}}</div>
@@ -60,20 +77,6 @@
               </div>
             </div>
           </div>
-        </el-tab-pane>
-      </el-tabs>
-<!--      右上角切换按钮-->
-      <div class="btn-box" v-if="false">
-        <el-button size="small" @click="gotoWeek(-1)">
-          <i class="el-icon-arrow-left"></i>
-        </el-button>
-        <el-button size="small" @click="gotoWeek(1)" style="margin-left: 0;">
-          <i class="el-icon-arrow-right"></i>
-        </el-button>
-        <el-button size="small" @click="gotoWeek(0)">
-          今天
-        </el-button>
-      </div>
     </div>
   </div>
 </template>
@@ -86,6 +89,124 @@ export default {
       // 模拟数据
       analogData: [
         {
+          area: '大陆',
+          openStatus: true,
+          data: [
+            {
+              title: "未分配",
+              data: []
+            },
+            {
+              title: '张珊',
+              data: [
+                {date: '2021-02-05', title: '迪', status: "pending"},
+                {date: '2021-02-05', title: '加', status: "pending"},
+                {date: '2021-02-03', title: '阿', status: "pending"},
+                {date: '2021-02-04', title: '他', status: "pending"},
+                {date: '2021-02-07', title: '马', status: "pending"},
+              ]
+            },
+            {
+              title: '李思',
+              data: [
+                {date: '2021-02-08', title: 'xixix1', status: "accepted"},
+                {date: '2021-02-01', title: 'xixix2', status: "accepted"},
+                {date: '2021-02-03', title: 'xixix3', status: "accepted"},
+                {date: '2021-02-04', title: 'xixix4', status: "accepted"},
+                {date: '2021-02-07', title: 'xixix5', status: "accepted"},
+              ]
+            },
+          ]
+        },
+        {
+          area: '港澳台',
+          openStatus: true,
+          data: [
+            {
+              title: "未分配",
+              data: []
+            },
+            {
+              title: '王舞',
+              data: [
+                {date: '2021-02-05', title: 'hahhah'},
+                {date: '2021-02-01', title: 'hahhah'},
+                {date: '2021-02-03', title: 'hahhah'},
+                {date: '2021-02-04', title: 'hahhah'},
+                {date: '2021-02-07', title: 'hahhah'},
+              ]
+            },
+            {
+              title: '赵琉',
+              data: [
+                {date: '2021-02-05', title: '111ah'},
+                {date: '2021-02-01', title: '111ah'},
+                {date: '2021-02-03', title: '111ah'},
+                {date: '2021-02-04', title: '111ah'},
+                {date: '2021-02-07', title: '111ah'},
+              ]
+            },
+          ]
+        },{
+          area: '大陆',
+          openStatus: true,
+          data: [
+            {
+              title: "未分配",
+              data: []
+            },
+            {
+              title: '张珊',
+              data: [
+                {date: '2021-02-05', title: '迪', status: "pending"},
+                {date: '2021-02-05', title: '加', status: "pending"},
+                {date: '2021-02-03', title: '阿', status: "pending"},
+                {date: '2021-02-04', title: '他', status: "pending"},
+                {date: '2021-02-07', title: '马', status: "pending"},
+              ]
+            },
+            {
+              title: '李思',
+              data: [
+                {date: '2021-02-08', title: 'xixix1', status: "accepted"},
+                {date: '2021-02-01', title: 'xixix2', status: "accepted"},
+                {date: '2021-02-03', title: 'xixix3', status: "accepted"},
+                {date: '2021-02-04', title: 'xixix4', status: "accepted"},
+                {date: '2021-02-07', title: 'xixix5', status: "accepted"},
+              ]
+            },
+          ]
+        },
+        {
+          area: '港澳台',
+          openStatus: true,
+          data: [
+            {
+              title: "未分配",
+              data: []
+            },
+            {
+              title: '王舞',
+              data: [
+                {date: '2021-02-05', title: 'hahhah'},
+                {date: '2021-02-01', title: 'hahhah'},
+                {date: '2021-02-03', title: 'hahhah'},
+                {date: '2021-02-04', title: 'hahhah'},
+                {date: '2021-02-07', title: 'hahhah'},
+              ]
+            },
+            {
+              title: '赵琉',
+              data: [
+                {date: '2021-02-05', title: '111ah'},
+                {date: '2021-02-01', title: '111ah'},
+                {date: '2021-02-03', title: '111ah'},
+                {date: '2021-02-04', title: '111ah'},
+                {date: '2021-02-07', title: '111ah'},
+              ]
+            },
+          ]
+        },{
           area: '大陆',
           openStatus: true,
           data: [
@@ -184,14 +305,15 @@ export default {
     },
     // 切换时间
     gotoWeek(flag) {
-      if (flag === -1) {
-        this.handleDate(this.addDate(this.currentFirstDate,-7))
-      } else if (flag === 1 ) {
-        this.handleDate(this.addDate(this.currentFirstDate,7));
-      } else if (flag === 0 ) {
-        let d = new Date()
-        this.handleDate(this.addDate(d, -1))
-      }
+      console.log(flag);
+      // if (flag === -1) {
+      //   this.handleDate(this.addDate(this.currentFirstDate,-7))
+      // } else if (flag === 1 ) {
+      //   this.handleDate(this.addDate(this.currentFirstDate,7));
+      // } else if (flag === 0 ) {
+      //   let d = new Date()
+      //   this.handleDate(this.addDate(d, -1))
+      // }
     },
     // 格式化时间
     formatDate(date){
@@ -264,10 +386,18 @@ export default {
   position: relative;
 }
 
+.header-option{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 60px;
+  background-color: #fff;
+  width: calc(100% - 36px);
+  height: 40px;
+  z-index: 101;
+}
 .btn-box{
-  position: absolute;
-  right: 10px;
-  top: 0;
   display: flex;
   justify-content: flex-end;
 }
@@ -275,8 +405,11 @@ export default {
 .week {
   display: flex;
   justify-content: space-around;
-  width: 100%;
-
+  width: calc(100% - 36px);
+  background-color: #fff;
+  position: fixed;
+  top: 100px;
+  z-index: 101;
   .week-day, .week-day-active{
     width: 12.5%;
     border: 1px solid #DEDCDA;
@@ -301,10 +434,13 @@ export default {
 }
 
 .week-event{
+  padding-top: 56px;
   .week-event-item{
     .week-event-area{
+      position: sticky;
+      top: 152px;
       background: #f3f2f2;
-      width: 100%;
+      //width: 100%;
       height: 32px;
       line-height: 32px;
       padding: 0 8px;
