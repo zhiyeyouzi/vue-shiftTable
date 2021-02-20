@@ -5,14 +5,6 @@
       <h2>轮班表</h2>
     </div>
     <div class="week-table-header">
-      <!-- <el-tabs v-model="activeName" @tab-click="handleTabClick" style="width: 100%;">
-        <el-tab-pane label="轮班" name="first">
-          <p></p>
-          <h1>轮班</h1>
-        </el-tab-pane>
-        <el-tab-pane label="资源" name="second">
-        </el-tab-pane>
-      </el-tabs> -->
       <div class="header-option">
         <div class="tab-view">
           <div :class="activeName===0?'tab-view-item tab-view-item-active':'tab-view-item'" @click="handleTabClick(0)">轮班</div>
@@ -346,6 +338,7 @@ export default {
           ]
         },
       ],
+      // 当前菜单
       activeName: 1,
       // 今天
       todayDate: '',
@@ -494,15 +487,15 @@ export default {
     height: 40px;
     .tab-view-item{
       cursor: pointer;
-      padding: 0 5px;
+      width: 48px;
       font-size: 14px;
       color: #333333;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
     .tab-view-item:first-child{
-      margin-right: 30px;
+      margin-right: 20px;
     }
     .tab-view-item:hover{
 
@@ -605,6 +598,8 @@ export default {
               width: 20px;
               height: 20px;
               margin-right: 5px;
+              background-color: #006DCC;
+              border-radius: 50%;
             }
           }
         }
@@ -650,10 +645,5 @@ export default {
       }
     }
   }
-
-}
-
-/deep/.el-tabs__header{
-  margin: 0;
 }
 </style>
