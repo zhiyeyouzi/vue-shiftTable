@@ -66,7 +66,7 @@
                   </div>
                   <!--                    已分配给人-->
                   <div class="item-day-left-alloted" v-else>
-                    <img src="" alt="icon">
+                    <img src="./../assets/header.svg" alt="icon">
                     {{itemA.title}}
                   </div>
                 </div>
@@ -599,9 +599,12 @@ export default {
             color: #006DCC;
             text-decoration:underline;
             cursor: pointer;
+            display: flex;
+            align-items: center;
             img{
               width: 20px;
               height: 20px;
+              margin-right: 5px;
             }
           }
         }
