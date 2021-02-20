@@ -1,6 +1,9 @@
 <template>
   <div class="week-home">
 <!--    切换星期-->
+    <div class="blank-space" >
+      <h2>轮班表</h2>
+    </div>
     <div class="week-table-header">
       <!-- <el-tabs v-model="activeName" @tab-click="handleTabClick" style="width: 100%;">
         <el-tab-pane label="轮班" name="first">
@@ -11,7 +14,10 @@
         </el-tab-pane>
       </el-tabs> -->
       <div class="header-option">
-        <div class="tab-view">资源</div>
+        <div class="tab-view">
+          <div :class="activeName===0?'tab-view-item tab-view-item-active':'tab-view-item'" @click="handleTabClick(0)">轮班</div>
+          <div :class="activeName===1?'tab-view-item tab-view-item-active':'tab-view-item'" @click="handleTabClick(1)">资源</div>
+        </div>
         <!--      右上角切换按钮-->
         <div class="btn-box" v-if="true">
           <el-button size="small" @click="gotoWeek(-1)">
@@ -25,58 +31,71 @@
           </el-button>
         </div>
       </div>
-<!--星期视图表头-->
-      <div class="week">
-            <div class="week-day"></div>
-            <div v-for="(item, index) in weekBox" :key="index" :class="item.day.num!== todayDate?'week-day':'week-day week-day-active'">
-              {{ item.day.week }}
-            </div>
+<!--      轮班-->
+      <div v-show="activeName===0">
+        <!--星期视图表头-->
+        <div class="week">
+          <div class="week-day"></div>
+          <div v-for="(item, index) in weekBox" :key="index" :class="item.day.num!== todayDate?'week-day':'week-day week-day-active'">
+            {{ item.day.week }}
           </div>
-<!--          下方数据展示-->
-      <div class="week-event">
-            <div class="week-event-item" v-for="(item, index) in analogData" :key="index">
-<!--              按区域区分-->
-              <div class="week-event-area" @click="tapAreaStatus(item, index)">{{item.area}}</div>
-<!--              区域下的的任务-->
-              <div class="week-event-table" v-for="(itemA, indexA) in item.data" :key="indexA" v-show="item.openStatus">
-                <div class="week-item">
-<!--                  左侧展示的每个人-->
-                  <div class="week-item-day-left">
-<!--                    未分配-->
-                    <div class="item-day-left-unallot" v-if="indexA === 0">
-                      {{itemA.title}}
-                    </div>
-<!--                    已分配给人-->
-                    <div class="item-day-left-alloted" v-else>
-                      <img src="" alt="icon">
-                      {{itemA.title}}
-                    </div>
+        </div>
+      </div>
+<!--      资源-->
+      <div v-show="activeName===1">
+        <!--星期视图表头-->
+        <div class="week">
+          <div class="week-day"></div>
+          <div v-for="(item, index) in weekBox" :key="index" :class="item.day.num!== todayDate?'week-day':'week-day week-day-active'">
+            {{ item.day.week }}
+          </div>
+        </div>
+        <!--          下方数据展示-->
+        <div class="week-event">
+          <div class="week-event-item" v-for="(item, index) in analogData" :key="index">
+            <!--              按区域区分-->
+            <div class="week-event-area" @click="tapAreaStatus(item, index)">{{item.area}}</div>
+            <!--              区域下的的任务-->
+            <div class="week-event-table" v-for="(itemA, indexA) in item.data" :key="indexA" v-show="item.openStatus">
+              <div class="week-item">
+                <!--                  左侧展示的每个人-->
+                <div class="week-item-day-left">
+                  <!--                    未分配-->
+                  <div class="item-day-left-unallot" v-if="indexA === 0">
+                    {{itemA.title}}
                   </div>
-<!--                  右侧的日历格子-->
-                  <div class="week-item-day" v-for="(itemBox, indexBox) in weekBox"
-                       :key="indexBox"
-                       @click="handleGridDate(itemBox, itemA)">
-<!--                    第一种-->
-<!--                    <div v-for="(itemB, indexB) in itemA.data"-->
-<!--                         :key="indexB" class="week-item-order"-->
-<!--                         @click.stop="handleClickEvent"-->
-<!--                         v-show="itemBox.day.num === itemB.date">-->
-<!--                      <div class="week-item-order-t">{{itemB.date}}我你笑ID解散分开了较好的是功夫就可获得更好的福利卡改好了打分卡挂号费打卡记录挂号费大骨灰级阿卡丽</div>-->
-<!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}撒京东快地方噶广东省防范大哥发的刮大风</div>-->
-<!--                    </div>-->
-<!--                    第二种-->
-<!--                    <div v-for="(itemB, indexB) in itemA.data" :key="indexB" class="week-item-order">-->
-<!--                      <template-->
-<!--                          v-if="itemBox.day.num === itemB.date">-->
-<!--                        <div class="week-item-order-t">{{itemB.date}}</div>-->
-<!--                        <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
-<!--                      </template>-->
-<!--                    </div>-->
+                  <!--                    已分配给人-->
+                  <div class="item-day-left-alloted" v-else>
+                    <img src="" alt="icon">
+                    {{itemA.title}}
                   </div>
+                </div>
+                <!--                  右侧的日历格子-->
+                <div class="week-item-day" v-for="(itemBox, indexBox) in weekBox"
+                     :key="indexBox"
+                     @click="handleGridDate(itemBox, itemA)">
+                  <!--                    第一种-->
+                  <!--                    <div v-for="(itemB, indexB) in itemA.data"-->
+                  <!--                         :key="indexB" class="week-item-order"-->
+                  <!--                         @click.stop="handleClickEvent"-->
+                  <!--                         v-show="itemBox.day.num === itemB.date">-->
+                  <!--                      <div class="week-item-order-t">{{itemB.date}}我你笑ID解散分开了较好的是功夫就可获得更好的福利卡改好了打分卡挂号费打卡记录挂号费大骨灰级阿卡丽</div>-->
+                  <!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}撒京东快地方噶广东省防范大哥发的刮大风</div>-->
+                  <!--                    </div>-->
+                  <!--                    第二种-->
+                  <!--                    <div v-for="(itemB, indexB) in itemA.data" :key="indexB" class="week-item-order">-->
+                  <!--                      <template-->
+                  <!--                          v-if="itemBox.day.num === itemB.date">-->
+                  <!--                        <div class="week-item-order-t">{{itemB.date}}</div>-->
+                  <!--                        <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
+                  <!--                      </template>-->
+                  <!--                    </div>-->
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -89,7 +108,7 @@ export default {
       // 模拟数据
       analogData: [
         {
-          area: '大陆',
+          area: '中国',
           openStatus: true,
           data: [
             {
@@ -119,7 +138,7 @@ export default {
           ]
         },
         {
-          area: '港澳台',
+          area: '日本',
           openStatus: true,
           data: [
             {
@@ -148,7 +167,7 @@ export default {
             },
           ]
         },{
-          area: '大陆',
+          area: '美国',
           openStatus: true,
           data: [
             {
@@ -178,7 +197,7 @@ export default {
           ]
         },
         {
-          area: '港澳台',
+          area: '韩国',
           openStatus: true,
           data: [
             {
@@ -207,7 +226,7 @@ export default {
             },
           ]
         },{
-          area: '大陆',
+          area: '英国',
           openStatus: true,
           data: [
             {
@@ -237,7 +256,67 @@ export default {
           ]
         },
         {
-          area: '港澳台',
+          area: '法国',
+          openStatus: true,
+          data: [
+            {
+              title: "未分配",
+              data: []
+            },
+            {
+              title: '王舞',
+              data: [
+                {date: '2021-02-05', title: 'hahhah'},
+                {date: '2021-02-01', title: 'hahhah'},
+                {date: '2021-02-03', title: 'hahhah'},
+                {date: '2021-02-04', title: 'hahhah'},
+                {date: '2021-02-07', title: 'hahhah'},
+              ]
+            },
+            {
+              title: '赵琉',
+              data: [
+                {date: '2021-02-05', title: '111ah'},
+                {date: '2021-02-01', title: '111ah'},
+                {date: '2021-02-03', title: '111ah'},
+                {date: '2021-02-04', title: '111ah'},
+                {date: '2021-02-07', title: '111ah'},
+              ]
+            },
+          ]
+        },
+        {
+          area: '德国',
+          openStatus: true,
+          data: [
+            {
+              title: "未分配",
+              data: []
+            },
+            {
+              title: '王舞',
+              data: [
+                {date: '2021-02-05', title: 'hahhah'},
+                {date: '2021-02-01', title: 'hahhah'},
+                {date: '2021-02-03', title: 'hahhah'},
+                {date: '2021-02-04', title: 'hahhah'},
+                {date: '2021-02-07', title: 'hahhah'},
+              ]
+            },
+            {
+              title: '赵琉',
+              data: [
+                {date: '2021-02-05', title: '111ah'},
+                {date: '2021-02-01', title: '111ah'},
+                {date: '2021-02-03', title: '111ah'},
+                {date: '2021-02-04', title: '111ah'},
+                {date: '2021-02-07', title: '111ah'},
+              ]
+            },
+          ]
+        },
+        {
+          area: '俄罗斯',
           openStatus: true,
           data: [
             {
@@ -267,7 +346,7 @@ export default {
           ]
         },
       ],
-      activeName: 'second',
+      activeName: 1,
       // 今天
       todayDate: '',
       // 当前日期
@@ -300,8 +379,8 @@ export default {
       // console.log(item)
     },
     // 切换视图
-    handleTabClick(tab, event) {
-      console.log(tab, event);
+    handleTabClick(tab) {
+      this.activeName = tab
     },
     // 切换时间
     gotoWeek(flag) {
@@ -378,7 +457,19 @@ export default {
 <style scoped lang="scss">
 
 .week-home{
-  padding: 10px;
+  padding:  0 10px 10px 10px;
+}
+
+//占位用
+.blank-space{
+  height: 78px;
+  width: calc(100% - 20px);
+  background: #ffffff;
+  z-index: 101;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .week-table-header{
@@ -393,9 +484,35 @@ export default {
   position: fixed;
   top: 60px;
   background-color: #fff;
-  width: calc(100% - 36px);
+  width: calc(100% - 42px);
   height: 40px;
   z-index: 101;
+  border: 1px solid #DEDCDA;
+  padding: 0 10px;
+  .tab-view{
+    display: flex;
+    height: 40px;
+    .tab-view-item{
+      cursor: pointer;
+      padding: 0 5px;
+      font-size: 14px;
+      color: #333333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .tab-view-item:first-child{
+      margin-right: 30px;
+    }
+    .tab-view-item:hover{
+
+    }
+    .tab-view-item-active{
+      color: #080707;
+      font-weight: bold;
+      border-bottom: 2px solid #006DCC;
+    }
+  }
 }
 .btn-box{
   display: flex;
@@ -405,7 +522,7 @@ export default {
 .week {
   display: flex;
   justify-content: space-around;
-  width: calc(100% - 36px);
+  width: calc(100% - 20px);
   background-color: #fff;
   position: fixed;
   top: 100px;
@@ -434,7 +551,7 @@ export default {
 }
 
 .week-event{
-  padding-top: 56px;
+  padding-top: 152px;
   .week-event-item{
     .week-event-area{
       position: sticky;

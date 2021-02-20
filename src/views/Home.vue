@@ -1,10 +1,14 @@
 <template>
   <div class="home">
+    <h1>Welcome to the animal world</h1>
     <el-carousel :interval="4000" type="card" height="500px">
       <el-carousel-item v-for="item in urls" :key="item">
         <img :src="item" alt="">
       </el-carousel-item>
     </el-carousel>
+    <div class="floating-ball" @click="goToShift">
+      go
+    </div>
   </div>
 </template>
 
@@ -27,17 +31,33 @@ export default {
         'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'
       ]
     }
+  },
+  methods: {
+    goToShift() {
+      this.$router.push({
+        path: '/about'
+      })
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.img-box{
-  height: 100%;
-  img{
-    width: 100%;
-    height: 100%;
-  }
+.floating-ball {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: fixed;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 1px solid #666666;
+  cursor: pointer;
+}
+.floating-ball:hover{
+  background-color: lightblue;
 }
 .el-carousel__item h3 {
   color: #475669;
