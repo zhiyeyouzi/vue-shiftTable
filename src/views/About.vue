@@ -67,21 +67,22 @@
                      :key="indexBox"
                      @click="handleGridDate(itemBox, itemA)">
                   <!--                    第一种-->
-                  <!--                    <div v-for="(itemB, indexB) in itemA.data"-->
-                  <!--                         :key="indexB" class="week-item-order"-->
-                  <!--                         @click.stop="handleClickEvent"-->
-                  <!--                         v-show="itemBox.day.num === itemB.date">-->
-                  <!--                      <div class="week-item-order-t">{{itemB.date}}我你笑ID解散分开了较好的是功夫就可获得更好的福利卡改好了打分卡挂号费打卡记录挂号费大骨灰级阿卡丽</div>-->
-                  <!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}撒京东快地方噶广东省防范大哥发的刮大风</div>-->
-                  <!--                    </div>-->
+<!--                  <div v-for="(itemB, indexB) in itemA.data"-->
+<!--                       :key="indexB" class="week-item-order"-->
+<!--                       @click.stop="handleClickEvent"-->
+<!--                       v-show="itemBox.day.num === itemB.date">-->
+<!--                    <div class="week-item-order-t">{{itemB.date}}我你笑ID解散分开了较好的是功夫就可获得更好的福利卡改好了打分卡挂号费打卡记录挂号费大骨灰级阿卡丽</div>-->
+<!--                    <div class="week-item-order-b">{{itemB.status + itemB.title}}撒京东快地方噶广东省防范大哥发的刮大风</div>-->
+<!--                  </div>-->
                   <!--                    第二种-->
-                  <!--                    <div v-for="(itemB, indexB) in itemA.data" :key="indexB" class="week-item-order">-->
-                  <!--                      <template-->
-                  <!--                          v-if="itemBox.day.num === itemB.date">-->
-                  <!--                        <div class="week-item-order-t">{{itemB.date}}</div>-->
-                  <!--                        <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
-                  <!--                      </template>-->
-                  <!--                    </div>-->
+<!--                  <div v-for="(itemB, indexB) in itemA.data"-->
+<!--                       :key="indexB"-->
+<!--                       @click.stop="handleClickEvent">-->
+<!--                    <div v-if="itemBox.day.num === itemB.date" class="week-item-order">-->
+<!--                      <div class="week-item-order-t">{{itemB.date}}</div>-->
+<!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
+<!--                    </div>-->
+<!--                  </div>-->
                 </div>
               </div>
             </div>
