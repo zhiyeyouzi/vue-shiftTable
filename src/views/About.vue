@@ -46,7 +46,11 @@
         <div class="week-event">
           <div class="week-event-item" v-for="(item, index) in analogData" :key="index">
             <!--              按区域区分-->
-            <div class="week-event-area" @click="tapAreaStatus(item, index)">{{item.area}}</div>
+            <div class="week-event-area" @click="tapAreaStatus(item, index)">
+              <i class="el-icon-arrow-down" v-show="item.openStatus"></i>
+              <i class="el-icon-arrow-right" v-show="!item.openStatus"></i>
+              {{item.area}}
+            </div>
             <!--              区域下的的任务-->
             <div class="week-event-table" v-for="(itemA, indexA) in item.data" :key="indexA" v-show="item.openStatus">
               <div class="week-item">
@@ -83,6 +87,12 @@
 <!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
 <!--                    </div>-->
 <!--                  </div>-->
+                  <div @click.stop="handleClickEvent">
+                    <div class="week-item-order">
+                      <div class="week-item-order-t">asssssdasdas</div>
+                      <div class="week-item-order-b">asdsadasdasdas</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
