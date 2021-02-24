@@ -87,12 +87,22 @@
 <!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
 <!--                    </div>-->
 <!--                  </div>-->
-                  <div @click.stop="handleClickEvent">
-                    <div class="week-item-order">
-                      <div class="week-item-order-t">asssssdasdas</div>
-                      <div class="week-item-order-b">asdsadasdasdas</div>
+                  <el-popover
+                      placement="right"
+                      width="270"
+                      popper-class="popover-shift"
+                      trigger="click">
+                    <div style="background: #f3f2f2;padding: 12px;">
+                      <p>上午12:00-上午2:30</p>
+                      <p>Tentative·{{ itemA.title }}</p>
                     </div>
-                  </div>
+                    <div slot="reference" @click.stop="handleClickEvent">
+                      <div class="week-item-order" :style="{'border-color': borderColor}">
+                        <div class="week-item-order-t">上午12:00-上午2:30</div>
+                        <div class="week-item-order-b">Tentative·{{ itemA.title }}</div>
+                      </div>
+                    </div>
+                  </el-popover>
                 </div>
               </div>
             </div>
@@ -108,6 +118,7 @@ export default {
   name: "About",
   data() {
     return {
+      borderColor: 'blue',
       // 模拟数据
       analogData: [
         {
@@ -378,7 +389,7 @@ export default {
     },
     // 点击格子
     handleGridDate(week, item) {
-      this.$message.info(item.title +'——————————'+ week.day.num)
+      this.$message.info(item.title +'点击了'+ week.day.num)
       // console.log(week)
       // console.log(item)
     },
@@ -596,6 +607,7 @@ export default {
             padding-left: 10px;
           }
           .item-day-left-unallot{
+            padding-left: 35px;
             font-weight: bold;
             color: #080707;
           }
@@ -657,4 +669,5 @@ export default {
     }
   }
 }
+
 </style>
