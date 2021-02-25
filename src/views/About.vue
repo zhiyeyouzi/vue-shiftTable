@@ -93,11 +93,12 @@
                       popper-class="popover-shift"
                       trigger="click">
                     <div style="background: #f3f2f2;padding: 12px;">
+                      <p>{{itemBox.day.num}}</p>
                       <p>上午12:00-上午2:30</p>
                       <p>Tentative·{{ itemA.title }}</p>
                     </div>
                     <div slot="reference" @click.stop="handleClickEvent">
-                      <div class="week-item-order" :style="{'border-color': borderColor}">
+                      <div :class="['week-item-order', indexA===0?'week-item-order-bg':'', 'week-item-order-ba']" >
                         <div class="week-item-order-t">上午12:00-上午2:30</div>
                         <div class="week-item-order-b">Tentative·{{ itemA.title }}</div>
                       </div>
@@ -118,7 +119,6 @@ export default {
   name: "About",
   data() {
     return {
-      borderColor: 'blue',
       // 模拟数据
       analogData: [
         {
@@ -640,7 +640,6 @@ export default {
             border: 1px solid #DEDCDA;
             border-radius: 3px;
             margin-bottom: 10px;
-            border-left: 3px solid red;
             padding: 6px 10px;
             box-sizing: border-box;
             .week-item-order-t, .week-item-order-b{
@@ -660,6 +659,22 @@ export default {
             .week-item-order-b{
               color: #333333;
             }
+          }
+          //#fff3e4  未分配的背景色
+          //#ff9e2c  状态 暂时
+          //#4bca81  状态 确认
+          //#1589ee  状态 已发布
+          .week-item-order-bg{
+            background: #fff3e4;
+          }
+          .week-item-order-ba{
+            border-left: 3px solid #ff9e2c;
+          }
+          .week-item-order-bb{
+            border-left: 3px solid #4bca81;
+          }
+          .week-item-order-bc{
+            border-left: 3px solid #1589ee;
           }
         }
         .week-item-day:last-child{
