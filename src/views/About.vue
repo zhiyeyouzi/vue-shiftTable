@@ -399,15 +399,14 @@ export default {
     },
     // 切换时间
     gotoWeek(flag) {
-      console.log(flag);
-      // if (flag === -1) {
-      //   this.handleDate(this.addDate(this.currentFirstDate,-7))
-      // } else if (flag === 1 ) {
-      //   this.handleDate(this.addDate(this.currentFirstDate,7));
-      // } else if (flag === 0 ) {
-      //   let d = new Date()
-      //   this.handleDate(this.addDate(d, -1))
-      // }
+      if (flag === -1) {
+        this.handleDate(this.addDate(this.currentFirstDate,-7))
+      } else if (flag === 1 ) {
+        this.handleDate(this.addDate(this.currentFirstDate,7));
+      } else if (flag === 0 ) {
+        let d = new Date()
+        this.handleDate(this.addDate(d, -1))
+      }
     },
     // 格式化时间
     formatDate(date){
@@ -668,13 +667,13 @@ export default {
             background: #fff3e4;
           }
           .week-item-order-ba{
-            border-left: 3px solid #ff9e2c;
+            border-left: 4px solid #ff9e2c;
           }
           .week-item-order-bb{
-            border-left: 3px solid #4bca81;
+            border-left: 4px solid #4bca81;
           }
           .week-item-order-bc{
-            border-left: 3px solid #1589ee;
+            border-left: 4px solid #1589ee;
           }
         }
         .week-item-day:last-child{

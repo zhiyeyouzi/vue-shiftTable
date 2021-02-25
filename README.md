@@ -1,6 +1,7 @@
 # vue-shift-table
 这是一个什么项目呢？
-可能一个用 div 堆起来的表格。 
+一个用 div 堆起来的表格？
+或许勉为其难可以称其为轮班表？
 
 ## Project setup
 ```
