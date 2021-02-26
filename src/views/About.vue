@@ -78,32 +78,33 @@
 <!--                    <div class="week-item-order-t">{{itemB.date}}我你笑ID解散分开了较好的是功夫就可获得更好的福利卡改好了打分卡挂号费打卡记录挂号费大骨灰级阿卡丽</div>-->
 <!--                    <div class="week-item-order-b">{{itemB.status + itemB.title}}撒京东快地方噶广东省防范大哥发的刮大风</div>-->
 <!--                  </div>-->
-                  <!--                    第二种-->
-<!--                  <div v-for="(itemB, indexB) in itemA.data"-->
-<!--                       :key="indexB"-->
-<!--                       @click.stop="handleClickEvent">-->
-<!--                    <div v-if="itemBox.day.num === itemB.date" class="week-item-order">-->
-<!--                      <div class="week-item-order-t">{{itemB.date}}</div>-->
-<!--                      <div class="week-item-order-b">{{itemB.status + itemB.title}}</div>-->
+<!--                  假数据-->
+                  <div v-for="(itemB, indexB) in itemA.data"
+                       :key="indexB"
+                       @click.stop="handleClickEvent">
+                    <div v-if="itemBox.day.num === itemB.date"
+                         :class="['week-item-order', indexA===0?'week-item-order-bg':'', itemB.status==='0'?'week-item-order-ba':'', itemB.status==='1'?'week-item-order-bb':'', itemB.status==='2'?'week-item-order-bc':'']" >
+                      <div class="week-item-order-t">上午12:00-上午2:30</div>
+                      <div class="week-item-order-b">Tentative·{{ itemA.title }}</div>
+                    </div>
+                  </div>
+<!--                  <el-popover-->
+<!--                      placement="right"-->
+<!--                      width="270"-->
+<!--                      popper-class="popover-shift"-->
+<!--                      trigger="click">-->
+<!--                    <div style="background: #f3f2f2;padding: 12px;">-->
+<!--                      <p>{{itemBox.day.num}}</p>-->
+<!--                      <p>上午12:00-上午2:30</p>-->
+<!--                      <p>Tentative·{{ itemA.title }}</p>-->
 <!--                    </div>-->
-<!--                  </div>-->
-                  <el-popover
-                      placement="right"
-                      width="270"
-                      popper-class="popover-shift"
-                      trigger="click">
-                    <div style="background: #f3f2f2;padding: 12px;">
-                      <p>{{itemBox.day.num}}</p>
-                      <p>上午12:00-上午2:30</p>
-                      <p>Tentative·{{ itemA.title }}</p>
-                    </div>
-                    <div slot="reference" @click.stop="handleClickEvent">
-                      <div :class="['week-item-order', indexA===0?'week-item-order-bg':'', 'week-item-order-ba']" >
-                        <div class="week-item-order-t">上午12:00-上午2:30</div>
-                        <div class="week-item-order-b">Tentative·{{ itemA.title }}</div>
-                      </div>
-                    </div>
-                  </el-popover>
+<!--                    <div slot="reference" @click.stop="handleClickEvent">-->
+<!--                      <div :class="['week-item-order', indexA===0?'week-item-order-bg':'', 'week-item-order-ba']" >-->
+<!--                        <div class="week-item-order-t">上午12:00-上午2:30</div>-->
+<!--                        <div class="week-item-order-b">Tentative·{{ itemA.title }}</div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </el-popover>-->
                 </div>
               </div>
             </div>
@@ -127,26 +128,32 @@ export default {
           data: [
             {
               title: "未分配",
-              data: []
+              data: [
+                {date: '2021-02-25', title: '迪', status: "0"},
+                {date: '2021-02-25', title: '加', status: "0"},
+                {date: '2021-02-23', title: '阿', status: "0"},
+                {date: '2021-03-04', title: '他', status: "0"},
+                {date: '2021-02-27', title: '马', status: "0"},
+              ]
             },
             {
               title: '张珊',
               data: [
-                {date: '2021-02-05', title: '迪', status: "pending"},
-                {date: '2021-02-05', title: '加', status: "pending"},
-                {date: '2021-02-03', title: '阿', status: "pending"},
-                {date: '2021-02-04', title: '他', status: "pending"},
-                {date: '2021-02-07', title: '马', status: "pending"},
+                {date: '2021-02-22', title: '迪', status: "1"},
+                {date: '2021-02-23', title: '加', status: "1"},
+                {date: '2021-02-24', title: '阿', status: "2"},
+                {date: '2021-02-23', title: '他', status: "1"},
+                {date: '2021-02-27', title: '马', status: "2"},
               ]
             },
             {
               title: '李思',
               data: [
-                {date: '2021-02-08', title: 'xixix1', status: "accepted"},
-                {date: '2021-02-01', title: 'xixix2', status: "accepted"},
-                {date: '2021-02-03', title: 'xixix3', status: "accepted"},
-                {date: '2021-02-04', title: 'xixix4', status: "accepted"},
-                {date: '2021-02-07', title: 'xixix5', status: "accepted"},
+                {date: '2021-02-28', title: 'xixix1', status: "2"},
+                {date: '2021-02-21', title: 'xixix2', status: "2"},
+                {date: '2021-02-13', title: 'xixix3', status: "1"},
+                {date: '2021-02-24', title: 'xixix4', status: "1"},
+                {date: '2021-02-07', title: 'xixix5', status: "2"},
               ]
             },
           ]
@@ -157,55 +164,30 @@ export default {
           data: [
             {
               title: "未分配",
-              data: []
+              data: [
+                {date: '2021-02-25', title: '迪', status: "0"},
+                {date: '2021-03-04', title: '他', status: "0"},
+                {date: '2021-02-27', title: '马', status: "0"},
+              ]
             },
             {
               title: '王舞',
               data: [
-                {date: '2021-02-05', title: 'hahhah'},
-                {date: '2021-02-01', title: 'hahhah'},
-                {date: '2021-02-03', title: 'hahhah'},
-                {date: '2021-02-04', title: 'hahhah'},
-                {date: '2021-02-07', title: 'hahhah'},
+                {date: '2021-02-25', title: 'hahhah', status: "2"},
+                {date: '2021-02-01', title: 'hahhah', status: "1"},
+                {date: '2021-02-23', title: 'hahhah', status: "0"},
+                {date: '2021-02-24', title: 'hahhah', status: "1"},
+                {date: '2021-02-17', title: 'hahhah', status: "2"},
               ]
             },
             {
               title: '赵琉',
               data: [
-                {date: '2021-02-05', title: '111ah'},
-                {date: '2021-02-01', title: '111ah'},
-                {date: '2021-02-03', title: '111ah'},
-                {date: '2021-02-04', title: '111ah'},
-                {date: '2021-02-07', title: '111ah'},
-              ]
-            },
-          ]
-        },{
-          area: '美国',
-          openStatus: true,
-          data: [
-            {
-              title: "未分配",
-              data: []
-            },
-            {
-              title: '张珊',
-              data: [
-                {date: '2021-02-05', title: '迪', status: "pending"},
-                {date: '2021-02-05', title: '加', status: "pending"},
-                {date: '2021-02-03', title: '阿', status: "pending"},
-                {date: '2021-02-04', title: '他', status: "pending"},
-                {date: '2021-02-07', title: '马', status: "pending"},
-              ]
-            },
-            {
-              title: '李思',
-              data: [
-                {date: '2021-02-08', title: 'xixix1', status: "accepted"},
-                {date: '2021-02-01', title: 'xixix2', status: "accepted"},
-                {date: '2021-02-03', title: 'xixix3', status: "accepted"},
-                {date: '2021-02-04', title: 'xixix4', status: "accepted"},
-                {date: '2021-02-07', title: 'xixix5', status: "accepted"},
+                {date: '2021-02-15', title: '111ah', status: "2"},
+                {date: '2021-02-21', title: '111ah', status: "2"},
+                {date: '2021-02-13', title: '111ah', status: "1"},
+                {date: '2021-02-14', title: '111ah', status: "1"},
+                {date: '2021-02-17', title: '111ah', status: "2"},
               ]
             },
           ]
@@ -216,149 +198,32 @@ export default {
           data: [
             {
               title: "未分配",
-              data: []
+              data: [
+                {date: '2021-02-27', title: '马', status: "0"},
+              ]
             },
             {
               title: '王舞',
               data: [
-                {date: '2021-02-05', title: 'hahhah'},
-                {date: '2021-02-01', title: 'hahhah'},
-                {date: '2021-02-03', title: 'hahhah'},
-                {date: '2021-02-04', title: 'hahhah'},
-                {date: '2021-02-07', title: 'hahhah'},
+                {date: '2021-02-25', title: 'hahhah', status: "0"},
+                {date: '2021-02-22', title: 'hahhah', status: "2"},
+                {date: '2021-02-23', title: 'hahhah', status: "1"},
+                {date: '2021-02-24', title: 'hahhah', status: "1"},
+                {date: '2021-02-27', title: 'hahhah', status: "1"},
               ]
             },
             {
               title: '赵琉',
               data: [
-                {date: '2021-02-05', title: '111ah'},
-                {date: '2021-02-01', title: '111ah'},
-                {date: '2021-02-03', title: '111ah'},
-                {date: '2021-02-04', title: '111ah'},
-                {date: '2021-02-07', title: '111ah'},
+                {date: '2021-02-25', title: '111ah', status: "0"},
+                {date: '2021-02-21', title: '111ah', status: "2"},
+                {date: '2021-02-13', title: '111ah', status: "1"},
+                {date: '2021-02-14', title: '111ah', status: "1"},
+                {date: '2021-02-17', title: '111ah', status: "2"},
               ]
             },
           ]
-        },{
-          area: '英国',
-          openStatus: true,
-          data: [
-            {
-              title: "未分配",
-              data: []
-            },
-            {
-              title: '张珊',
-              data: [
-                {date: '2021-02-05', title: '迪', status: "pending"},
-                {date: '2021-02-05', title: '加', status: "pending"},
-                {date: '2021-02-03', title: '阿', status: "pending"},
-                {date: '2021-02-04', title: '他', status: "pending"},
-                {date: '2021-02-07', title: '马', status: "pending"},
-              ]
-            },
-            {
-              title: '李思',
-              data: [
-                {date: '2021-02-08', title: 'xixix1', status: "accepted"},
-                {date: '2021-02-01', title: 'xixix2', status: "accepted"},
-                {date: '2021-02-03', title: 'xixix3', status: "accepted"},
-                {date: '2021-02-04', title: 'xixix4', status: "accepted"},
-                {date: '2021-02-07', title: 'xixix5', status: "accepted"},
-              ]
-            },
-          ]
-        },
-        {
-          area: '法国',
-          openStatus: true,
-          data: [
-            {
-              title: "未分配",
-              data: []
-            },
-            {
-              title: '王舞',
-              data: [
-                {date: '2021-02-05', title: 'hahhah'},
-                {date: '2021-02-01', title: 'hahhah'},
-                {date: '2021-02-03', title: 'hahhah'},
-                {date: '2021-02-04', title: 'hahhah'},
-                {date: '2021-02-07', title: 'hahhah'},
-              ]
-            },
-            {
-              title: '赵琉',
-              data: [
-                {date: '2021-02-05', title: '111ah'},
-                {date: '2021-02-01', title: '111ah'},
-                {date: '2021-02-03', title: '111ah'},
-                {date: '2021-02-04', title: '111ah'},
-                {date: '2021-02-07', title: '111ah'},
-              ]
-            },
-          ]
-        },
-        {
-          area: '德国',
-          openStatus: true,
-          data: [
-            {
-              title: "未分配",
-              data: []
-            },
-            {
-              title: '王舞',
-              data: [
-                {date: '2021-02-05', title: 'hahhah'},
-                {date: '2021-02-01', title: 'hahhah'},
-                {date: '2021-02-03', title: 'hahhah'},
-                {date: '2021-02-04', title: 'hahhah'},
-                {date: '2021-02-07', title: 'hahhah'},
-              ]
-            },
-            {
-              title: '赵琉',
-              data: [
-                {date: '2021-02-05', title: '111ah'},
-                {date: '2021-02-01', title: '111ah'},
-                {date: '2021-02-03', title: '111ah'},
-                {date: '2021-02-04', title: '111ah'},
-                {date: '2021-02-07', title: '111ah'},
-              ]
-            },
-          ]
-        },
-        {
-          area: '俄罗斯',
-          openStatus: true,
-          data: [
-            {
-              title: "未分配",
-              data: []
-            },
-            {
-              title: '王舞',
-              data: [
-                {date: '2021-02-05', title: 'hahhah'},
-                {date: '2021-02-01', title: 'hahhah'},
-                {date: '2021-02-03', title: 'hahhah'},
-                {date: '2021-02-04', title: 'hahhah'},
-                {date: '2021-02-07', title: 'hahhah'},
-              ]
-            },
-            {
-              title: '赵琉',
-              data: [
-                {date: '2021-02-05', title: '111ah'},
-                {date: '2021-02-01', title: '111ah'},
-                {date: '2021-02-03', title: '111ah'},
-                {date: '2021-02-04', title: '111ah'},
-                {date: '2021-02-07', title: '111ah'},
-              ]
-            },
-          ]
-        },
+        }
       ],
       // 当前菜单
       activeName: 1,
@@ -631,7 +496,7 @@ export default {
           min-height: 50px;
           font-size: 12px;
           border-right: none;
-          padding: 5px;
+          padding: 5px 5px 10px 5px;
           box-sizing: border-box;
           .week-item-order{
             width: 100%;
@@ -641,6 +506,7 @@ export default {
             margin-bottom: 10px;
             padding: 6px 10px;
             box-sizing: border-box;
+            background: #ffffff;
             .week-item-order-t, .week-item-order-b{
               text-align: left;
               font-size: 12px;
@@ -675,6 +541,9 @@ export default {
           .week-item-order-bc{
             border-left: 4px solid #1589ee;
           }
+        }
+        .week-item-day:hover{
+          background: #eef1f6;
         }
         .week-item-day:last-child{
           border-right: 1px solid #DEDCDA;
